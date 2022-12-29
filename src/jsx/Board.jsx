@@ -1,6 +1,6 @@
 import React from 'react';
 import Square from './Square';
-import './Board.css';
+import '../css/Board.css';
 const Board = (props) => {
   let retSquares = [];
   for (let i = 0; i < 15; i++) {

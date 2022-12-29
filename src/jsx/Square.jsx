@@ -1,5 +1,5 @@
 import React from 'react';
-import './Square.css';
+import '../css/Square.css';
 const Square = (props) => {
   return <div className='square' style={{ backgroundColor: `${props.actualColor}` }}></div>;
 };
