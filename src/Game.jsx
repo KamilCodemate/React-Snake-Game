@@ -13,6 +13,7 @@ class Game extends React.Component {
       snakeLength: 1,
       displayText: 'Press [SPACE] to start the game',
       didGameStarted: false,
+      speed: 120,
     };
     this.move = this.move.bind(this);
     this.generateApple = this.generateApple.bind(this);
@@ -43,7 +44,7 @@ class Game extends React.Component {
       if ((e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') && this.state.direction !== 'top' && this.state.didGameStarted)
         this.setState({ direction: 'bottom' });
     });
-    setInterval(() => this.move(), 120);
+    setInterval(() => this.move(), this.state.speed);
   }
 
   move() {
@@ -121,6 +122,9 @@ class Game extends React.Component {
     if (body.slice(1).some((square) => square[0] === head[0] && square[1] === head[1])) {
       this.handleLoss('hit yourself');
     }
+    if (this.state.snakeLength >= 254) {
+      this.handleLoss('win');
+    }
   }
 
   handleLoss(reason) {
@@ -132,6 +136,11 @@ class Game extends React.Component {
       head: [0, 2],
       snakeLength: 1,
     });
+    if (reason === 'win') {
+      this.setState({
+        displayText: 'Congrats! You won! Press [SPACE] to play again',
+      });
+    }
   }
   render() {
     return (
